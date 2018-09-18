@@ -15,3 +15,4 @@ This repo is part of a STAT 545 exercise to explore GitHub and markdown.
 * cm002
 * cm003
 * cm004
+* cm005
