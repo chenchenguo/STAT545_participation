@@ -369,12 +369,17 @@ ggplot(gapminder, aes(year, lifeExp))+
 
 ``` r
 ggplot(gapminder, aes(year, pop, color=gdpPercap))+
-  geom_smooth()+
-  geom_line()
+  geom_line(aes(group=country),alpha=0.2)
 ```
-
-    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 
 ![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-23-1.png)
 
 **Exercise 6**: Add points to the plot in Exercise 5.
+
+``` r
+ggplot(gapminder, aes(year, pop, color=gdpPercap))+
+  geom_line(aes(group=country),alpha=0.2)+
+  geom_point()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-24-1.png)

@@ -271,10 +271,15 @@ ggplot(gapminder, aes(year, lifeExp))+
 __Exercise 5__: Plot the population over time (year) using lines, so that each country has its own line. Colour by `gdpPercap`. Add alpha transparency to your liking. 
 ```{r}
 ggplot(gapminder, aes(year, pop, color=gdpPercap))+
-  geom_smooth()+
-  geom_line()
+  geom_line(aes(group=country),alpha=0.2)
   
 ```
 
 
 __Exercise 6__: Add points to the plot in Exercise 5.
+```{r}
+ggplot(gapminder, aes(year, pop, color=gdpPercap))+
+  geom_line(aes(group=country),alpha=0.2)+
+  geom_point()
+```
+
