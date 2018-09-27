@@ -1,13 +1,12 @@
 ---
 title: "STAT 545 Class Meeting 08"
-output:
-    html_notebook:
-        toc: true
-        theme: cerulean
-        number_sections: true
-editor_options: 
-  chunk_output_type: inline
+output: github_document
 ---
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+```
 
 
 ## Today's Lessons
@@ -15,7 +14,26 @@ editor_options:
 Today's topic is _one-table verbs with `dplyr`_. We've already seen `select`, `filter`, and `arrange`. 
 
 - mutate
+```{r}
+gapminder %>% 
+  mutate(gdp=gdpPercap*pop,
+         gdpBill= round(gdp/10^9,2))
+```
+
 - grouped summarize
+```{r}
+gapminder %>% 
+  transmute(gdp=gdpPercap*pop,
+         gdpBill= round(gdp/10^9,2))
+```
+```{r}
+#replace h to H
+if_else(letters=="h","H", letters)
+gapminder %>% 
+  mutate(lifeExp = if_else(country=="Canada"& year==1952, 70, lifeExp)) %>% 
+  filter(country=="Canada")
+```
+
 - grouped mutate
 
 ...and their corresponding theoretical function types. 
