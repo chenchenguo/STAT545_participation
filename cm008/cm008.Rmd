@@ -253,6 +253,7 @@ Sanity check: are Canada's numbers = 1? What is the spread of numbers like (shou
 - `select()`
 - `filter()`
 - `arrange()`
+
 - `mutate()`
 - `summarize()`
 
