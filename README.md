@@ -1,5 +1,6 @@
 ### STAT 545 Participation
-This repo is part of a STAT 545 exercise to explore GitHub and markdown.
+Chenchen Guo 
+ID:97729164
   
 ## Content-For STAT545
 * cm001
