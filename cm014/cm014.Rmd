@@ -136,5 +136,9 @@ Let's make it easier to extract info, using the `broom` package. There are three
 Exercise: apply all three functions to our fitted model, `my_lm`. What do you see?
 
 ```{r}
+tidy(my_lm)
 
+augment(my_lm)
+augment(my_lm, newdata = tibble(gdpPercap = c(500, 600, 700)))
+glance(my_lm)
 ```
