@@ -54,8 +54,20 @@ c <- c(7,8,9)
 pmap(list(a, b, c), function(x, y, z) x*y*z)
 ```
 ```{r}
+a <- c(1,2,3)
+b <- c(4,5,6)
+c <- c(7,8,9)
+d <- c(10,11,12)
+pmap(list(a, b, c, d), function(x, y, z, w) x*y*z*w)
+```
+
+
+```{r}
 pmap(list(a, b, c), ~ ..1 * ..2 * ..3)
 ```
+
+
+
 ```{r}
 pmap_dbl(list(a, b, c), ~ ..1 * ..2 * ..3)
 ```
@@ -67,6 +79,7 @@ Using the following two vectors...
 ```{r}
 commute <- c(10, 50, 35)
 name <- c("Parveen", "Kayden", "Shawn")
+
 ```
 
 use `map2_chr()` to come up with the following output in three ways:
@@ -78,20 +91,32 @@ str_c(name, " takes ", commute, " minutes to get to work.")
 1. By defining a function before feeding it into `map2()` -- call it `comm_fun`.
 
 ```{r}
-comm_fun <- FILL_THIS_IN
-map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)
+comm_fun <- function(s, t)
+  str_c(s, " takes ", t, " minutes to get to the work")
+map2(name, commute, comm_fun)
+map2_chr(name, commute, comm_fun)
+
+
+comm_fun2 <- function(s, t){
+  str_c(s, " takes ", t, " minutes to get to the work")
+}
+
+map2_chr(name, commute, comm_fun)
+
 ```
 
 2. By defining a function "on the fly" within the `map2()` function.
 
 ```{r}
-map2(name, commute, function(t, s) FILL_THIS_IN)
+map2_chr(name, commute, function(s, t){
+  str_c(s, " takes ", t, " minutes to get to the work")
+} )
 ```
 
 3. By defining a formula.
 
 ```{r}
-map2(name, commute, ~ FILL_THIS_IN)
+map2_chr(name, commute, ~ str_c(.x, " takes ", .y , " minutes to get to work."))
 ```
 
 
