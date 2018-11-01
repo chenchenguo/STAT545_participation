@@ -156,7 +156,12 @@ This is where `map()` comes in handy! Let's make a tibble using the `got_chars` 
 2. Specify the columns with `purrr` mappings.
 
 ```{r}
-got_alias <- got_chars %>% FILL_THIS_IN
+#got_chars[[1]]
+got_alias <- got_chars %>% {
+  tibble(name = map_chr(., "name"),
+         aliases = map(., "aliases"))
+}
+got_alias
 ```
 
 Write the solution down carefully -- we'll be referring to `got_alias` later. 
@@ -172,9 +177,10 @@ Approach 1: Without piping
 3. Subset the newly-named list to Melisandre.
 
 ```{r}
-(alias_list <- FILL_THIS_IN)
-names(alias_list) <- FILL_THIS_IN
-SUBSET_HERE
+(alias_list <- got_alias$aliases)
+names(alias_list) <- got_alias$name
+alias_list
+alias_list[["Melisandre"]]
 ```
 
 Approach 2: With piping
@@ -183,12 +189,16 @@ Approach 2: With piping
 2. Then, pipe that into a subsetting function to subset Melisandre.
 
 ```{r}
-got_alias %>% FILL_THIS_IN
+got_alias %>% 
+  {setNames(.$aliases, .$name)} %>% 
+  `[[`("Melisandre")
 ```
+
 
 ## Nesting/Unnesting; Operating
 
 __Question__: What would tidy data of `got_alias` look like? Remember what `got_alias` holds:
+
 
 ```{r}
 got_alias
@@ -208,8 +218,13 @@ Let's make a tidy data frame! First, let's take a closer look at `tidyr::unnest(
 I can make a tidy data frame _without_ list columns using `tidyr::unnest()`:
 
 ```{r}
+#unnest is to show the compressed data in a list
 icecream %>% 
     unnest(flav)
+
+icecream %>% 
+    unnest(flav) %>% 
+  filter(flav == "strawberry")
 ```
 
 How would I subset all people that like strawberry ice cream? We can either use the tidy data, or the list data directly:
@@ -226,7 +241,11 @@ From list-column data:
 
 ```{r}
 icecream %>% 
-  filter(map_lgl(flav, ~ FILL_THIS_IN))
+  filter(map_lgl(flav, ~ any(.x == "strawberry")))
+
+icecream %>% 
+  filter(map_lgl(flav, ~ any(.x == "strawberry"))) %>% 
+  unnest()
 ```
 
 
@@ -235,7 +254,10 @@ icecream %>%
 `unnest()` the `got_alias` tibble. Hint: there should be a hiccup. Check out the `str()`ucture of `got_alias` -- are all elements of the list column vectors? Would using `tidyr::drop_na()` be a good idea here?
 
 ```{r}
-FILL_THIS_IN
+#str(got_alias)
+#drop_na will dismiss the NULL data
+got_alias %>% 
+  drop_na() %>% str()
 ```
 
 We can also do the opposite with `tidyr::nest()`. Try it with the `iris` data frame:
@@ -244,7 +266,9 @@ We can also do the opposite with `tidyr::nest()`. Try it with the `iris` data fr
 2. `nest()`!
 
 ```{r}
-FILL_THIS_IN
+iris %>% 
+  group_by(Species) %>% 
+  nest()
 ```
 
 Keep the nested `iris` data frame above going! Keep piping:
