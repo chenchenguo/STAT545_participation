@@ -1,17 +1,12 @@
 ---
 title: "Class Meeting 4 Worksheet"
-output:
-    html_notebook:
-        toc: true
-        theme: cerulean
-        number_sections: true
-editor_options: 
-  chunk_output_type: inline
+output: github_document
+always_keep_html: yes
 ---
 
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
-library(repurrrsive)
+suppressPackageStartupMessages(library(repurrrsive))
 ```
 
 # Resources
