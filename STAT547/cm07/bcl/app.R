@@ -12,8 +12,9 @@ library(shiny)
 library(ggplot2)
 library(tidyverse)
 library(dplyr)
+library(rsconnect)
 
-bcl <- read.csv(file="D:/STAT545_Rfile/STAT545_participation/STAT547/cm07/bcl/bcl-data.csv", stringsAsFactors = FALSE)
+bcl <- read.csv(file="./bcl-data.csv", stringsAsFactors = FALSE)
 # Define UI for application that draws a histogram
 
 ui <- fluidPage(
