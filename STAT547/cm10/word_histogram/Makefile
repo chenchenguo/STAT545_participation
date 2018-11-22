@@ -1,7 +1,7 @@
 all: histogram.png
 
 clean:
-	rm -f words.txt histogram.tsv
+	rm -f words.txt histogram.tsv histogram.png
 
 
 words.txt:
@@ -12,3 +12,4 @@ histogram.tsv: histogram.R words.txt
 
 histogram.png: histogram.tsv
 	Rscript -e 'library(ggplot2); qplot(Length, Freq, data=read.delim("$<")); ggsave("$@")'
+	rm -f Rplots.pdf
