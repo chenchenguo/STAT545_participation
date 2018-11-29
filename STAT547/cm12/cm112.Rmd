@@ -112,7 +112,8 @@ __OMDb Exercise__:
 2. Form a request!
 
 ```{r}
-s
+jsonlite::fromJSON("http://www.omdbapi.com/?t=Jurassic+Park&apikey=37955bc2")
+jsonlite::fromJSON("http://www.omdbapi.com/?t=The+Wolf+of+Wall+Street&apikey=37955bc2")
 ```
 
 
@@ -219,12 +220,21 @@ __Together__:
 2. Inspect its `str()`ucture, `class()`, and `names()`.
 
 ```{r}
-site <- GET("PUT_URL_HERE")
+# use GET function to get a website
+site <- GET("www.neopets.com")
+str(site)
+names(site)
+class(site)
+
+
+
 ```
 
 3. What's the `$status_code`? How about the `$content`?
 
 ```{r}
+site$status_code
+site$content
 
 ```
 
@@ -242,6 +252,12 @@ content(site)
 
 ```{r}
 jsonlite::fromJSON("https://api.github.com/users/hadley/orgs")
+site1 <-GET("https://api.github.com/users/hadley/orgs")
+status_code(
+  site1
+)
+content(site1)
+
 ```
 
 ## Exercise
